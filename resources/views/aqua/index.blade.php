@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Aqua
+{{ __('Aqua') }}
 @endsection
 
 @section('content')
@@ -18,7 +18,7 @@
 
                              <div class="float-right">
                                 <a href="{{ route('aquas.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
-                                  {{ __('Create New') }}
+                                 <span class="mdi mdi-plus"></span>
                                 </a>
                               </div>
                         </div>

@@ -19,8 +19,19 @@
     <!-- endinject -->
     <!-- Layout styles -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <style>
+      .card .card-body {
+     padding:10px 10px ; 
+}
+    </style>
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" />
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+     <!-- Scripts -->
+     <script src="{{ asset('js/app.js') }}" defer></script>
+     
   </head>
   <body>
     <div class="container-scroller">
