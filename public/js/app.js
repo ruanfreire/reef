@@ -5290,14 +5290,72 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      date_time: ""
+      date_time: "00:00",
+      temp_data_name: "Carregando",
+      temp_data_icon: "10d",
+      temp_data: [{
+        feels_like: '00',
+        humidity: '00',
+        pressure: '00',
+        temp: '00',
+        temp_max: '00',
+        temp_min: '00'
+      }]
     };
   },
-  mounted: function mounted() {
+  mounted: function mounted() {},
+  created: function created() {
     this.clock();
+    this.weather();
   },
   methods: {
     clock: function clock() {
@@ -5317,9 +5375,33 @@ __webpack_require__.r(__webpack_exports__);
         // no nosso elemento HTML
 
         x.date_time = hora + ":" + minuto; //this.data.minute.push(minuto);
-
-        console.log(x.date_time); //document.getElementById('hora').textContent = hora+':'+minuto+':'+segundo;
+        // console.log(x.date_time)
+        //document.getElementById('hora').textContent = hora+':'+minuto+':'+segundo;
       }, 1000);
+    },
+    weather: function weather() {
+      var x = this;
+      var key = 'c7fc3a6413957ae64c074355f9e63f75';
+      navigator.geolocation.getCurrentPosition(function (position) {
+        var lat = position.coords.latitude;
+        var _long = position.coords.longitude;
+        fetch('https://api.openweathermap.org/data/2.5/weather?lat=' + lat + '&lon=' + _long + '&units=metric&appid=' + key).then(function (resp) {
+          return resp.json();
+        }) // Convert data to json
+        .then(function (data) {
+          x.temp_data_name = data.name + ' ' + data.weather[0].description;
+          x.temp_data_icon = data.weather[0].icon;
+          x.temp_data = {
+            feels_like: data.main.feels_like,
+            humidity: data.main.humidity,
+            pressure: data.main.pressure,
+            temp: data.main.temp,
+            temp_max: data.main.temp_max,
+            temp_min: data.main.temp_min
+          }, console.log(x.temp_data);
+        })["catch"](function () {// catch any errors
+        });
+      });
     }
   }
 });
@@ -28105,10 +28187,8 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "col-xl-3 col-sm-6 grid-margin stretch-card" },
-    [
+  return _c("div", { staticClass: "row" }, [
+    _c("div", { staticClass: "col-xl-3 col-sm-6 grid-margin stretch-card" }, [
       _c("div", { staticClass: "card" }, [
         _c("div", { staticClass: "card-body" }, [
           _c("div", { staticClass: "row" }, [
@@ -28132,8 +28212,74 @@ var render = function () {
           ]),
         ]),
       ]),
-    ]
-  )
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-xl-3 col-sm-6 grid-margin stretch-card" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-9" }, [
+              _c(
+                "div",
+                { staticClass: "d-flex align-items-center align-self-start" },
+                [
+                  _c("h3", { staticClass: "mb-0" }, [
+                    _vm._v(_vm._s(_vm.temp_data.temp)),
+                  ]),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-3" }, [
+              _c("div", { staticClass: "icon " }, [
+                _c("span", {}, [
+                  _c("img", {
+                    attrs: {
+                      src:
+                        "https://openweathermap.org/img/w/" +
+                        _vm.temp_data_icon +
+                        ".png",
+                      alt: "",
+                    },
+                  }),
+                ]),
+              ]),
+            ]),
+          ]),
+          _vm._v(" "),
+          _c("h6", { staticClass: "text-muted font-weight-normal" }, [
+            _vm._v("Weather " + _vm._s(_vm.temp_data_name)),
+          ]),
+        ]),
+      ]),
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "col-xl-3 col-sm-6 grid-margin stretch-card" }, [
+      _c("div", { staticClass: "card" }, [
+        _c("div", { staticClass: "card-body" }, [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-9" }, [
+              _c(
+                "div",
+                { staticClass: "d-flex align-items-center align-self-start" },
+                [
+                  _c("h3", { staticClass: "mb-0" }, [
+                    _vm._v(_vm._s(_vm.temp_data.humidity)),
+                  ]),
+                ]
+              ),
+            ]),
+            _vm._v(" "),
+            _vm._m(1),
+          ]),
+          _vm._v(" "),
+          _c("h6", { staticClass: "text-muted font-weight-normal" }, [
+            _vm._v("Weather " + _vm._s(_vm.temp_data_name) + " air humidity"),
+          ]),
+        ]),
+      ]),
+    ]),
+  ])
 }
 var staticRenderFns = [
   function () {
@@ -28143,6 +28289,16 @@ var staticRenderFns = [
     return _c("div", { staticClass: "col-3" }, [
       _c("div", { staticClass: "icon icon-box-success " }, [
         _c("span", { staticClass: "mdi mdi-clock" }),
+      ]),
+    ])
+  },
+  function () {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-3" }, [
+      _c("div", { staticClass: "icon " }, [
+        _c("span", { staticClass: "mdi mdi-water" }),
       ]),
     ])
   },

@@ -21,8 +21,11 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <style>
       .card .card-body {
-     padding:10px 10px ; 
-}
+        padding:10px 10px; 
+      }
+      .content-wrapper{
+        padding: 10px 10px;
+      }
     </style>
     <!-- End layout styles -->
     <link rel="shortcut icon" href="{{ asset('images/favicon.png') }}" />

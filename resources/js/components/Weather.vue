@@ -86,9 +86,6 @@
                             // catch any errors
                         });
                     });
-                   
-                  
-                        
                 }
                 }
                    
